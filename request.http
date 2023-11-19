@@ -1,0 +1,45 @@
+GET http://localhost:3000
+
+###
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name":"niko",
+    "email":"nthia4@gmail.com",
+    "password":"niko123",
+    "password_confirmation":"niko123"
+}
+
+
+###
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"nthia4@gmail.com",
+    "password":"tes123"
+}
+
+
+###
+GET http://localhost:3000/api/v1/auth/whoami
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzAwMzkwMDQyfQ.IishFICwcqTLHmp0CMpWies4gnVLNcf0X6JpUMbTfxU
+
+
+###
+POST http://localhost:3000/api/v1/auth/forgot-password
+Content-Type: application/json
+
+{
+    "email":"nthia4@gmail.com"
+}
+
+###
+POST http://localhost:3000/api/v1/auth/reset-password
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im50aGlhNEBnbWFpbC5jb20iLCJpYXQiOjE3MDAzOTk2MDksImV4cCI6MTcwMDQwMzIwOX0.62_uK4Hp9_2pxTVU7f5eTY0MnfyZZJhR4ENCepYxUrU",
+    "newPassword": "tes123"
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>notif</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content text-center">
+            <div class="max-w-md">
+                <h1 class="text-5xl font-bold">haiii</h1>
+                <p class="py-6">notif update</p>
+                <a href="/user/forgot-password" target="_blank" class="btn btn-primary">Update Password</a>
+                <div class="overflow-x-auto">
+                    <table class="table">
+                        <!-- header -->
+                        <thead>
+                            <tr>
+                                <th>Notifications</th>
+                            </tr>
+                        </thead>
+                        <tbody id="notifications">
+                            <!-- Notifications will be dynamically inserted here -->
+                            <% user.notification.map((item) => { %>
+                                <tr class="bg-base-200">
+                                    <td><%= item.title %></td>
+                                    <td><%= item.body %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <script>
+        const socket = io();
+        const user_id = "<%= user.id %>";
+
+        socket.on(`notification_${user_id}`, (notif) => {
+            console.log("Connected");
+            const notificationsContainer = document.getElementById("notifications");
+            const row = document.createElement("tr");
+            row.classList.add("bg-base-200");
+            row.innerHTML = `
+                <td>${notif.title}</td>
+                <td>${notif.body}</td>
+            `;
+            notificationsContainer.appendChild(row);
+        });
+    </script>
+</body>
+</html>
